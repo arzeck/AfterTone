@@ -4,6 +4,7 @@
 *.pdb
 *.rlib
 *.d
+docs/
 
 # Bundled Desktop App & JRE Runtime distributions
 /app/
