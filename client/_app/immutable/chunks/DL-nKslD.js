@@ -1,0 +1,1 @@
+export{n as lyrics}from"./C62aK-UG.js";

@@ -1,0 +1,55 @@
+# Rust / Cargo
+/target/
+**/*.rs.bk
+*.pdb
+*.rlib
+*.d
+
+# Bundled Desktop App & JRE Runtime distributions
+/app/
+/runtime/
+
+# Native Binaries & Executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Node / Frontend (if building or bundling web client)
+node_modules/
+.svelte-kit/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment & Local Secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# IDE & Editor configurations
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs & Temporary files
+*.log
+.cache/
+tmp/
+temp/
