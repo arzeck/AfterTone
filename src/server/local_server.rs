@@ -165,7 +165,7 @@ impl LocalPartyServer {
     }
 
     pub fn base_url(&self) -> String {
-        format!("http://{}:{}", self.get_local_ip(), self.port)
+        format!("http://127.0.0.1:{}", self.port)
     }
 
     pub async fn start(&mut self, port: u16) -> Result<String, Box<dyn std::error::Error + Send + Sync>> {
@@ -174,13 +174,13 @@ impl LocalPartyServer {
         }
 
         let listener = if port == 0 {
-            TcpListener::bind("0.0.0.0:0")
+            TcpListener::bind("127.0.0.1:0")
                 .await
                 .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)?
         } else {
             let mut bind_port = port;
             loop {
-                match TcpListener::bind(format!("0.0.0.0:{}", bind_port)).await {
+                match TcpListener::bind(format!("127.0.0.1:{}", bind_port)).await {
                     Ok(l) => break l,
                     Err(_err) if bind_port < port + 10 => {
                         bind_port += 1;

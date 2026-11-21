@@ -5,6 +5,20 @@
 *.rlib
 *.d
 docs/
+*-old*
+
+# Packaging, Installers & Distribution Artifacts
+/dist/
+Output/
+installer/Output/
+*.msi
+*.msix
+*.appx
+*.ispc
+*.iss.tmp
+
+installer/
+scripts/
 
 # Bundled Desktop App & JRE Runtime distributions
 /app/
@@ -15,6 +29,10 @@ docs/
 *.dll
 *.so
 *.dylib
+
+# Gradle / Java Build Artifacts
+.gradle/
+build/
 
 # Node / Frontend (if building or bundling web client)
 node_modules/
@@ -33,11 +51,18 @@ pnpm-debug.log*
 # IDE & Editor configurations
 .idea/
 .vscode/
+.vs/
+*.suo
+*.user
 *.sublime-project
 *.sublime-workspace
 *.swp
 *.swo
 *~
+
+# Superpowers & Agent Workspaces
+.superpowers/
+.worktrees/
 
 # Operating System files
 .DS_Store
@@ -49,8 +74,10 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Logs & Temporary files
+# Logs, Dumps & Temporary files
 *.log
+*.dmp
+*.mdmp
 .cache/
 tmp/
 temp/

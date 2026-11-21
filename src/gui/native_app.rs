@@ -11,17 +11,25 @@ pub struct NativeDesktopApp;
 impl NativeDesktopApp {
     /// Resolves the path to the bundled or system Java 21 runtime.
     pub fn find_java_binary() -> Result<PathBuf> {
-        // 1. Check relative to current exe: <exe_dir>/runtime/bin/java.exe
+        // 1. Check relative to current exe: <exe_dir>/runtime/bin/javaw.exe (Windowed GUI) or java.exe
         if let Ok(exe) = std::env::current_exe() {
             if let Some(parent) = exe.parent() {
-                let candidate = parent.join("runtime").join("bin").join("java.exe");
-                if candidate.exists() {
-                    return Ok(candidate);
+                let javaw = parent.join("runtime").join("bin").join("javaw.exe");
+                if javaw.exists() {
+                    return Ok(javaw);
+                }
+                let java = parent.join("runtime").join("bin").join("java.exe");
+                if java.exists() {
+                    return Ok(java);
                 }
             }
         }
 
-        // 2. Check current working directory: ./runtime/bin/java.exe
+        // 2. Check current working directory: ./runtime/bin/javaw.exe or java.exe
+        let local_javaw = PathBuf::from("runtime").join("bin").join("javaw.exe");
+        if local_javaw.exists() {
+            return Ok(local_javaw);
+        }
         let local_candidate = PathBuf::from("runtime").join("bin").join("java.exe");
         if local_candidate.exists() {
             return Ok(local_candidate);
@@ -29,14 +37,18 @@ impl NativeDesktopApp {
 
         // 3. Check JAVA_HOME
         if let Ok(java_home) = std::env::var("JAVA_HOME") {
+            let javaw = PathBuf::from(&java_home).join("bin").join("javaw.exe");
+            if javaw.exists() {
+                return Ok(javaw);
+            }
             let candidate = PathBuf::from(java_home).join("bin").join("java.exe");
             if candidate.exists() {
                 return Ok(candidate);
             }
         }
 
-        // 4. Fallback to "java" on system PATH
-        Ok(PathBuf::from("java"))
+        // 4. Fallback to "javaw" on system PATH
+        Ok(PathBuf::from("javaw"))
     }
 
     /// Resolves the path to the bundled app directory containing application JARs and Skiko natives.
@@ -73,8 +85,8 @@ impl NativeDesktopApp {
         let skiko_path = format!("-Dskiko.library.path={}", app_dir.to_string_lossy());
         let working_dir = app_dir.parent().unwrap_or(&app_dir);
 
-        let mut child = Command::new(&java_bin)
-            .current_dir(working_dir)
+        let mut cmd = Command::new(&java_bin);
+        cmd.current_dir(working_dir)
             .arg("-Daftertone.version=1.0")
             .arg(&skiko_path)
             .arg("-Djpackage.app-version=1.8.30")
@@ -87,6 +99,15 @@ impl NativeDesktopApp {
             .arg("-cp")
             .arg(&classpath)
             .arg("com.music.bitchord.desktop.MainKt")
+            .stdout(std::process::Stdio::null())
+            .stderr(std::process::Stdio::null());
+
+        #[cfg(target_os = "windows")]
+        {
+            cmd.creation_flags(0x08000000); // CREATE_NO_WINDOW
+        }
+
+        let mut child = cmd
             .spawn()
             .map_err(|e| anyhow!("Failed to spawn native AfterTone GUI: {}", e))?;
 
