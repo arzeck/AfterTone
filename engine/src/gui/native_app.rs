@@ -14,25 +14,35 @@ impl NativeDesktopApp {
         // 1. Check relative to current exe: <exe_dir>/runtime/bin/javaw.exe (Windowed GUI) or java.exe
         if let Ok(exe) = std::env::current_exe() {
             if let Some(parent) = exe.parent() {
-                let javaw = parent.join("runtime").join("bin").join("javaw.exe");
-                if javaw.exists() {
-                    return Ok(javaw);
-                }
-                let java = parent.join("runtime").join("bin").join("java.exe");
-                if java.exists() {
-                    return Ok(java);
+                let candidates = [
+                    parent.join("runtime").join("bin").join("javaw.exe"),
+                    parent.join("runtime").join("bin").join("java.exe"),
+                    parent.join("windows").join("runtime").join("bin").join("javaw.exe"),
+                    parent.join("windows").join("runtime").join("bin").join("java.exe"),
+                    parent.join("..").join("windows").join("runtime").join("bin").join("javaw.exe"),
+                    parent.join("..").join("windows").join("runtime").join("bin").join("java.exe"),
+                ];
+                for cand in &candidates {
+                    if cand.exists() {
+                        return Ok(cand.clone());
+                    }
                 }
             }
         }
 
-        // 2. Check current working directory: ./runtime/bin/javaw.exe or java.exe
-        let local_javaw = PathBuf::from("runtime").join("bin").join("javaw.exe");
-        if local_javaw.exists() {
-            return Ok(local_javaw);
-        }
-        let local_candidate = PathBuf::from("runtime").join("bin").join("java.exe");
-        if local_candidate.exists() {
-            return Ok(local_candidate);
+        // 2. Check current working directory: ./windows/runtime, ../windows/runtime, or ./runtime
+        let local_candidates = [
+            PathBuf::from("windows").join("runtime").join("bin").join("javaw.exe"),
+            PathBuf::from("windows").join("runtime").join("bin").join("java.exe"),
+            PathBuf::from("..").join("windows").join("runtime").join("bin").join("javaw.exe"),
+            PathBuf::from("..").join("windows").join("runtime").join("bin").join("java.exe"),
+            PathBuf::from("runtime").join("bin").join("javaw.exe"),
+            PathBuf::from("runtime").join("bin").join("java.exe"),
+        ];
+        for cand in &local_candidates {
+            if cand.exists() {
+                return Ok(cand.clone());
+            }
         }
 
         // 3. Check JAVA_HOME
@@ -53,23 +63,35 @@ impl NativeDesktopApp {
 
     /// Resolves the path to the bundled app directory containing application JARs and Skiko natives.
     pub fn find_app_dir() -> Result<PathBuf> {
-        // 1. Check relative to current exe: <exe_dir>/app
+        // 1. Check relative to current exe: <exe_dir>/app, <exe_dir>/windows/app, or ../windows/app
         if let Ok(exe) = std::env::current_exe() {
             if let Some(parent) = exe.parent() {
-                let candidate = parent.join("app");
-                if candidate.exists() && candidate.join("skiko-windows-x64.dll").exists() {
-                    return Ok(candidate);
+                let candidates = [
+                    parent.join("app"),
+                    parent.join("windows").join("app"),
+                    parent.join("..").join("windows").join("app"),
+                ];
+                for cand in &candidates {
+                    if cand.exists() && cand.join("skiko-windows-x64.dll").exists() {
+                        return Ok(cand.clone());
+                    }
                 }
             }
         }
 
-        // 2. Check current working directory: ./app
-        let local_candidate = PathBuf::from("app");
-        if local_candidate.exists() && local_candidate.join("skiko-windows-x64.dll").exists() {
-            return Ok(local_candidate);
+        // 2. Check current working directory: ./windows/app, ../windows/app, or ./app
+        let local_candidates = [
+            PathBuf::from("windows").join("app"),
+            PathBuf::from("..").join("windows").join("app"),
+            PathBuf::from("app"),
+        ];
+        for cand in &local_candidates {
+            if cand.exists() && cand.join("skiko-windows-x64.dll").exists() {
+                return Ok(cand.clone());
+            }
         }
 
-        Err(anyhow!("Could not locate AfterTone desktop app directory with Skiko libraries (checked <exe_dir>/app and ./app)"))
+        Err(anyhow!("Could not locate AfterTone desktop app directory with Skiko libraries (checked <exe_dir>/app, windows/app, and ./app)"))
     }
 
     /// Launches and runs the native Compose Desktop GUI.

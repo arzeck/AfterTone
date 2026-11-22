@@ -110,15 +110,29 @@ impl Default for LocalPartyServer {
 fn find_client_dir() -> Option<PathBuf> {
     if let Ok(exe) = std::env::current_exe() {
         if let Some(parent) = exe.parent() {
-            let client_path = parent.join("client");
-            if client_path.exists() && client_path.join("index.html").exists() {
-                return Some(client_path);
+            let candidates = [
+                parent.join("web"),
+                parent.join("client"),
+                parent.join("..").join("web"),
+                parent.join("..").join("client"),
+            ];
+            for cand in &candidates {
+                if cand.exists() && cand.join("index.html").exists() {
+                    return Some(cand.clone());
+                }
             }
         }
     }
-    let local_client = PathBuf::from("client");
-    if local_client.exists() && local_client.join("index.html").exists() {
-        return Some(local_client);
+    let local_candidates = [
+        PathBuf::from("web"),
+        PathBuf::from("..").join("web"),
+        PathBuf::from("client"),
+        PathBuf::from("..").join("client"),
+    ];
+    for cand in &local_candidates {
+        if cand.exists() && cand.join("index.html").exists() {
+            return Some(cand.clone());
+        }
     }
     None
 }
