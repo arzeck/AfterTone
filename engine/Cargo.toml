@@ -5,6 +5,15 @@ edition = "2021"
 description = "AfterTone Listen Together Protocol, Synced Karaoke Lyrics, Audio Proxy & Party Server in Rust"
 authors = ["AfterTone Contributors"]
 
+[lib]
+name = "aftertone_native"
+crate-type = ["rlib", "cdylib"]
+path = "src/lib.rs"
+
+[[bin]]
+name = "aftertone-native"
+path = "src/main.rs"
+
 [dependencies]
 tokio = { version = "1.40", features = ["full"] }
 axum = { version = "0.7", features = ["ws"] }
@@ -31,6 +40,7 @@ lofty = "0.21"
 walkdir = "2.5"
 discord-rich-presence = "1.1"
 souvlaki = "0.9"
+jni = { version = "0.21", default-features = false }
 
 [target.'cfg(target_os = "windows")'.dependencies.windows-sys]
 version = "0.52"

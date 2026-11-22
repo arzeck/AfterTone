@@ -20,6 +20,7 @@ dependencies = [
  "crossterm",
  "discord-rich-presence",
  "futures-util",
+ "jni",
  "lofty",
  "rand 0.8.8",
  "regex",

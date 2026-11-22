@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import com.arzeck.aftertone.BitChordApplication
+import com.arzeck.aftertone.AfterToneApplication
 import com.arzeck.aftertone.BuildConfig
 import com.arzeck.aftertone.data.DebugLog as Log
 import com.arzeck.aftertone.data.settings.AppSettings
@@ -1412,7 +1412,7 @@ object ListenTogether {
      * real account identifiers would be holding something it has no use for.
      */
     private fun identity(nickname: String = nickname()): Identity? {
-        val store = BitChordApplication.authStore
+        val store = AfterToneApplication.authStore
         if (!store.isSignedIn) return null
         val account = store.activeSession ?: return null
         val profile = account.profiles.firstOrNull { it.profileId == account.activeProfileId }
@@ -1639,7 +1639,7 @@ object ListenTogether {
     const val CODE_LENGTH = 6
 
     private const val TAG = "ListenTogether"
-    private const val PREFS = "bitchord_listen_together"
+    private const val PREFS = "aftertone_listen_together"
     private const val KEY_SERVER = "server_url"
 
     /** What a redacted address reads as. Not a hostname, so it cannot be resolved back. */

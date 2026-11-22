@@ -11,6 +11,7 @@ pub mod download;
 pub mod gui;
 pub mod innertube;
 pub mod integrations;
+pub mod jni;
 pub mod library;
 pub mod lyrics;
 pub mod protocol;
