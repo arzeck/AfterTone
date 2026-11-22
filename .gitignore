@@ -1,26 +1,23 @@
 # Rust / Cargo
-/target/
+**/target/
 **/*.rs.bk
 *.pdb
 *.rlib
 *.d
-docs/
 *-old*
 
 # Packaging, Installers & Distribution Artifacts
-/dist/
-Output/
-installer/Output/
+**/dist/
+**/Output/
 *.msi
 *.msix
 *.appx
 *.ispc
 *.iss.tmp
 
-installer/
-scripts/
-
 # Bundled Desktop App & JRE Runtime distributions
+/windows/app/
+/windows/runtime/
 /app/
 /runtime/
 
