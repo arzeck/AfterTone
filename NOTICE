@@ -1,0 +1,31 @@
+AfterTone
+Copyright (C) 2026 AfterTone Contributors
+
+This project incorporates and adapts code from the following open-source projects:
+
+1. BitChord (https://github.com/kushagrasinghx/BitChord)
+   Copyright (C) 2026 Kushagra Singh <contact@kushagrasingh.in>
+   Licensed under the GNU General Public License, Version 3.0 (GPL-3.0).
+   BitChord provides the foundation for AfterTone's Android architecture (modules :app, :shared,
+   :sharedUi, and :native), the Listen Together party wire synchronization models, and Compose Multiplatform UI.
+
+2. Orchard (https://github.com/SFG5453/Orchard)
+   Copyright (C) 2026 SFG545
+   Licensed under the GNU Affero General Public License, Version 3.0 (AGPL-3.0).
+   Audio analysis, tempo estimation, and DSP routines.
+
+3. am-lyrics (https://github.com/binimum/am-lyrics)
+   Copyright (C) 2024-2026 Max Bai (binimum)
+   Licensed under the MIT License.
+   Word-by-word synchronized karaoke lyrics rendering and spring animation principles.
+
+4. InnerTubeX (https://github.com/MetrolistGroup/innertubex)
+   Copyright (C) 2024-2026 Metrolist Group
+   Licensed under the GNU General Public License, Version 3.0 (GPL-3.0).
+
+5. NewPipe Extractor (https://github.com/TeamNewPipe/NewPipeExtractor)
+   Copyright (C) TeamNewPipe
+   Licensed under the GNU General Public License, Version 3.0 (GPL-3.0).
+
+This software is licensed under the GNU General Public License, Version 3.0.
+A copy of the GNU General Public License is available in the LICENSE file.

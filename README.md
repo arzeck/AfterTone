@@ -136,6 +136,7 @@
   ```text
   AfterTone/
   ├── .github/        CI workflows and automated test pipelines
+  ├── android/        Android client (Kotlin Multiplatform + Jetpack Compose + C++ DSP)
   ├── engine/         Native Rust backend engine, proxy, and CLI utility
   ├── windows/        Windows desktop app, installer configuration, and build scripts
   ├── web/            Web client and party listen-along interface
@@ -143,12 +144,14 @@
   ├── Banner.png      Repository branding banner
   ├── Logo.png        Application icon artwork
   ├── README.md       Project documentation and guides
+  ├── NOTICE          Upstream attribution and copyright declarations
   ├── LICENSE         GNU General Public License v3.0
   └── .gitignore      Project and platform ignore definitions
   ```
 
   ### Building From Source
 
+  #### Rust Engine & CLI
   ```bash
   # Run unit and integration tests (16 tests)
   cargo test --manifest-path engine/Cargo.toml
@@ -159,9 +162,21 @@
   cargo build --release --manifest-path engine/Cargo.toml
   # or from the engine directory:
   cd engine && cargo build --release
+  ```
 
+  #### Windows Installer
+  ```powershell
   # Compile the standalone Windows Setup installer
   powershell -ExecutionPolicy Bypass -File windows\scripts\build-installer.ps1
+  ```
+
+  #### Android Client
+  ```powershell
+  # Build Android Dev Debug APK
+  cd android && .\gradlew.bat assembleDevDebug
+
+  # Build Android Production Release APK
+  cd android && .\gradlew.bat assembleProdRelease
   ```
 
   ---

@@ -1,6 +1,6 @@
-# AfterTone Android Client Implementation Plan
+﻿# AfterTone Android Client Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Build the standalone Android version of AfterTone under `android/` using BitChord's multiplatform Android architecture (`app`, `shared`, `sharedUi`, `native`) as the base, rebranded to `com.arzeck.aftertone`, with adaptive icons from `Logo.png`, Rust engine integration via JNI, and zero upstream telemetry or donation links.
 
@@ -42,13 +42,13 @@
 - Create: `android/.gitignore`
 - Copy: `android/gradlew`, `android/gradlew.bat`, `android/gradle/wrapper/gradle-wrapper.jar`, `android/gradle/wrapper/gradle-wrapper.properties` from `C:\Users\Aneesh\Documents\Projects\BitChord`
 
-- [ ] **Step 1:** Create `android/` folder and copy Gradle wrapper binaries and scripts (`gradlew`, `gradlew.bat`, `gradle/`).
-- [ ] **Step 2:** Write `android/settings.gradle.kts` configuring `rootProject.name = "AfterTone"`, repositories (Google, Maven Central, JitPack), and subproject includes (`:shared`, `:sharedUi`, `:app`).
-- [ ] **Step 3:** Write `android/build.gradle.kts` with AGP 8.10.1, R8 8.13.23 classpath, Kotlin 2.3.20, and Compose 1.10.3 plugins.
-- [ ] **Step 4:** Write `android/gradle.properties` configuring AndroidX, JVM memory options, and non-transitive R classes.
-- [ ] **Step 5:** Write `android/keystore.properties.example` and `android/.gitignore` (ignoring `.gradle/`, `build/`, `local.properties`, `*.jks`).
-- [ ] **Step 6:** Verify Gradle wrapper execution: run `.\android\gradlew.bat --version` from PowerShell.
-- [ ] **Step 7:** Commit: `git commit -m "chore(android): scaffold root gradle build and wrapper"`
+- [x] **Step 1:** Create `android/` folder and copy Gradle wrapper binaries and scripts (`gradlew`, `gradlew.bat`, `gradle/`).
+- [x] **Step 2:** Write `android/settings.gradle.kts` configuring `rootProject.name = "AfterTone"`, repositories (Google, Maven Central, JitPack), and subproject includes (`:shared`, `:sharedUi`, `:app`).
+- [x] **Step 3:** Write `android/build.gradle.kts` with AGP 8.10.1, R8 8.13.23 classpath, Kotlin 2.3.20, and Compose 1.10.3 plugins.
+- [x] **Step 4:** Write `android/gradle.properties` configuring AndroidX, JVM memory options, and non-transitive R classes.
+- [x] **Step 5:** Write `android/keystore.properties.example` and `android/.gitignore` (ignoring `.gradle/`, `build/`, `local.properties`, `*.jks`).
+- [x] **Step 6:** Verify Gradle wrapper execution: run `.\android\gradlew.bat --version` from PowerShell.
+- [x] **Step 7:** Commit: `git commit -m "chore(android): scaffold root gradle build and wrapper"`
 
 ---
 
@@ -66,10 +66,10 @@
 - Create: `android/native/analyzer/vocal_spectrogram.cpp`
 - Create: `android/native/analyzer/vocal_spectrogram.h`
 
-- [ ] **Step 1:** Copy `native/analyzer/` from upstream BitChord into `android/native/analyzer/`.
-- [ ] **Step 2:** Inspect headers and source files to verify standard C++17 compatibility with no broken relative includes.
-- [ ] **Step 3:** Verify all 10 source and header files exist and match upstream checksums.
-- [ ] **Step 4:** Commit: `git commit -m "feat(android): port native C++ audio analysis routines"`
+- [x] **Step 1:** Copy `native/analyzer/` from upstream BitChord into `android/native/analyzer/`.
+- [x] **Step 2:** Inspect headers and source files to verify standard C++17 compatibility with no broken relative includes.
+- [x] **Step 3:** Verify all 10 source and header files exist and match upstream checksums.
+- [x] **Step 4:** Commit: `git commit -m "feat(android): port native C++ audio analysis routines"`
 
 ---
 
@@ -80,12 +80,12 @@
 - Create: `android/shared/src/commonMain/kotlin/com/arzeck/aftertone/...`
 - Create: `android/shared/src/androidMain/kotlin/com/arzeck/aftertone/...`
 
-- [ ] **Step 1:** Copy `shared/` from BitChord into `android/shared/`.
-- [ ] **Step 2:** Rename directories and package declarations from `com.music.bitchord.*` to `com.arzeck.aftertone.*`.
-- [ ] **Step 3:** In `JamInvite.kt`, update invite link generation to `https://aftertone.app/invite/<CODE>` and deep link schema `aftertone://party/<CODE>`.
-- [ ] **Step 4:** Remove any calls or fallback URLs referencing `api.bitchord.kushagrasingh.in`.
-- [ ] **Step 5:** Verify `android/shared/build.gradle.kts` resolves dependencies and references correct namespace `com.arzeck.aftertone.shared`.
-- [ ] **Step 6:** Commit: `git commit -m "feat(android): port and rebrand shared data and domain module"`
+- [x] **Step 1:** Copy `shared/` from BitChord into `android/shared/`.
+- [x] **Step 2:** Rename directories and package declarations from `com.music.bitchord.*` to `com.arzeck.aftertone.*`.
+- [x] **Step 3:** In `JamInvite.kt`, update invite link generation to `https://aftertone.app/invite/<CODE>` and deep link schema `aftertone://party/<CODE>`.
+- [x] **Step 4:** Remove any calls or fallback URLs referencing `api.bitchord.kushagrasingh.in`.
+- [x] **Step 5:** Verify `android/shared/build.gradle.kts` resolves dependencies and references correct namespace `com.arzeck.aftertone.shared`.
+- [x] **Step 6:** Commit: `git commit -m "feat(android): port and rebrand shared data and domain module"`
 
 ---
 
@@ -96,11 +96,11 @@
 - Create: `android/sharedUi/src/commonMain/kotlin/com/arzeck/aftertone/sharedui/...`
 - Create: `android/sharedUi/src/androidMain/kotlin/com/arzeck/aftertone/sharedui/...`
 
-- [ ] **Step 1:** Copy `sharedUi/` from BitChord into `android/sharedUi/`.
-- [ ] **Step 2:** Refactor package namespace from `com.music.bitchord.sharedui.*` to `com.arzeck.aftertone.sharedui.*`.
-- [ ] **Step 3:** Update imports across UI components (`NowPlayingScreen.kt`, `LyricsView.kt`, `Palette.kt`, etc.) to point to `com.arzeck.aftertone.*`.
-- [ ] **Step 4:** Verify `android/sharedUi/build.gradle.kts` references namespace `com.arzeck.aftertone.sharedui`.
-- [ ] **Step 5:** Commit: `git commit -m "feat(android): port and rebrand sharedUi Compose components"`
+- [x] **Step 1:** Copy `sharedUi/` from BitChord into `android/sharedUi/`.
+- [x] **Step 2:** Refactor package namespace from `com.music.bitchord.sharedui.*` to `com.arzeck.aftertone.sharedui.*`.
+- [x] **Step 3:** Update imports across UI components (`NowPlayingScreen.kt`, `LyricsView.kt`, `Palette.kt`, etc.) to point to `com.arzeck.aftertone.*`.
+- [x] **Step 4:** Verify `android/sharedUi/build.gradle.kts` references namespace `com.arzeck.aftertone.sharedui`.
+- [x] **Step 5:** Commit: `git commit -m "feat(android): port and rebrand sharedUi Compose components"`
 
 ---
 
@@ -114,19 +114,19 @@
 - Create: `android/app/src/main/java/com/arzeck/aftertone/...`
 - Create: `android/app/src/main/res/...`
 
-- [ ] **Step 1:** Copy `app/` from BitChord into `android/app/`.
-- [ ] **Step 2:** In `android/app/build.gradle.kts`:
+- [x] **Step 1:** Copy `app/` from BitChord into `android/app/`.
+- [x] **Step 2:** In `android/app/build.gradle.kts`:
   - Set `namespace = "com.arzeck.aftertone"`.
   - Set `applicationId = "com.arzeck.aftertone"`.
   - Update dev flavor: `applicationId = "com.arzeck.aftertone.dev"`, `resValue("string", "app_name", "AfterTone Dev")`.
   - Update prod flavor: `resValue("string", "app_name", "AfterTone")`.
-- [ ] **Step 3:** Reorganize directory tree in `android/app/src/main/java/` from `com/music/bitchord/` to `com/arzeck/aftertone/`.
-- [ ] **Step 4:** Refactor package statements and imports across all Kotlin/Java files under `android/app/src/main/java/`.
-- [ ] **Step 5:** In `android/app/src/main/AndroidManifest.xml`, update package names, deep link schemes (`aftertone://`), and provider authorities.
-- [ ] **Step 6:** In `android/app/src/main/res/values/strings.xml`, change app title to "AfterTone" and remove BitChord strings.
-- [ ] **Step 7:** Remove donation links (Ko-fi, PayPal, UPI) and telemetry from Settings/About views.
-- [ ] **Step 8:** In `android/app/src/main/cpp/CMakeLists.txt`, ensure `BITCHORD_NATIVE_DIR` resolves cleanly to `android/native/` and outputs library `libbitchord_analysis.so` (or `libaftertone_analysis.so`).
-- [ ] **Step 9:** Commit: `git commit -m "feat(android): port and rebrand app module and playback service"`
+- [x] **Step 3:** Reorganize directory tree in `android/app/src/main/java/` from `com/music/bitchord/` to `com/arzeck/aftertone/`.
+- [x] **Step 4:** Refactor package statements and imports across all Kotlin/Java files under `android/app/src/main/java/`.
+- [x] **Step 5:** In `android/app/src/main/AndroidManifest.xml`, update package names, deep link schemes (`aftertone://`), and provider authorities.
+- [x] **Step 6:** In `android/app/src/main/res/values/strings.xml`, change app title to "AfterTone" and remove BitChord strings.
+- [x] **Step 7:** Remove donation links (Ko-fi, PayPal, UPI) and telemetry from Settings/About views.
+- [x] **Step 8:** In `android/app/src/main/cpp/CMakeLists.txt`, ensure `BITCHORD_NATIVE_DIR` resolves cleanly to `android/native/` and outputs library `libbitchord_analysis.so` (or `libaftertone_analysis.so`).
+- [x] **Step 9:** Commit: `git commit -m "feat(android): port and rebrand app module and playback service"`
 
 ---
 
@@ -142,11 +142,11 @@
 - Create: `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`
 - Create: `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml`
 
-- [ ] **Step 1:** Write a PowerShell script `android/scripts/generate-icons.ps1` utilizing `System.Drawing.Bitmap` to resize `Logo.png` into standard mipmap sizes.
-- [ ] **Step 2:** Run `android/scripts/generate-icons.ps1` to generate all density PNGs.
-- [ ] **Step 3:** Create adaptive XML drawables with dark background (`#121212`) and foreground logo.
-- [ ] **Step 4:** Verify icon files exist in all mipmap folders with correct dimensions.
-- [ ] **Step 5:** Commit: `git commit -m "feat(android): generate adaptive and legacy icons from Logo.png"`
+- [x] **Step 1:** Write a PowerShell script `android/scripts/generate-icons.ps1` utilizing `System.Drawing.Bitmap` to resize `Logo.png` into standard mipmap sizes.
+- [x] **Step 2:** Run `android/scripts/generate-icons.ps1` to generate all density PNGs.
+- [x] **Step 3:** Create adaptive XML drawables with dark background (`#121212`) and foreground logo.
+- [x] **Step 4:** Verify icon files exist in all mipmap folders with correct dimensions.
+- [x] **Step 5:** Commit: `git commit -m "feat(android): generate adaptive and legacy icons from Logo.png"`
 
 ---
 
@@ -159,17 +159,17 @@
 - Create: `android/app/src/main/java/com/arzeck/aftertone/engine/AfterToneNative.kt`
 - Test: `engine/tests/jni_test.rs`
 
-- [ ] **Step 1:** Add `[lib] crate-type = ["rlib", "cdylib"]` and `jni = "0.21"` dependency to `engine/Cargo.toml`.
-- [ ] **Step 2:** Write `engine/src/jni.rs` implementing:
+- [x] **Step 1:** Add `[lib] crate-type = ["rlib", "cdylib"]` and `jni = "0.21"` dependency to `engine/Cargo.toml`.
+- [x] **Step 2:** Write `engine/src/jni.rs` implementing:
   - `Java_com_arzeck_aftertone_engine_AfterToneNative_startServer(port: jint) -> jint`
   - `Java_com_arzeck_aftertone_engine_AfterToneNative_decryptSaavn(env, url: jstring) -> jstring`
   - `Java_com_arzeck_aftertone_engine_AfterToneNative_parseTtml(env, ttml: jstring) -> jstring`
   - `Java_com_arzeck_aftertone_engine_AfterToneNative_isServerRunning() -> jboolean`
   - `Java_com_arzeck_aftertone_engine_AfterToneNative_stopServer()`
-- [ ] **Step 3:** Implement Kotlin bridge `AfterToneNative.kt` in `android/app/src/main/java/com/arzeck/aftertone/engine/` loading library `libaftertone_engine`.
-- [ ] **Step 4:** Add unit tests in `engine/tests/` to verify Rust engine JNI functions and compilation.
-- [ ] **Step 5:** Run `cargo test --manifest-path engine/Cargo.toml --release` to ensure all 16 existing tests plus JNI tests pass.
-- [ ] **Step 6:** Commit: `git commit -m "feat(engine): add JNI bindings for Android client"`
+- [x] **Step 3:** Implement Kotlin bridge `AfterToneNative.kt` in `android/app/src/main/java/com/arzeck/aftertone/engine/` loading library `libaftertone_engine`.
+- [x] **Step 4:** Add unit tests in `engine/tests/` to verify Rust engine JNI functions and compilation.
+- [x] **Step 5:** Run `cargo test --manifest-path engine/Cargo.toml --release` to ensure all 16 existing tests plus JNI tests pass.
+- [x] **Step 6:** Commit: `git commit -m "feat(engine): add JNI bindings for Android client"`
 
 ---
 
@@ -179,10 +179,10 @@
 - Modify: `android/app/src/main/java/com/arzeck/aftertone/service/party/` (or repository)
 - Create: `android/app/src/main/java/com/arzeck/aftertone/engine/PartyBridge.kt`
 
-- [ ] **Step 1:** Wire the Android party client to communicate with AfterTone's party server format (6-character uppercase codes, JSON action messages `Join`, `Leave`, `SyncState`, `Heartbeat`).
-- [ ] **Step 2:** Wire monotonic clock synchronization matching the engine's NTP-style ping/pong calculation.
-- [ ] **Step 3:** Provide an in-app toggle: "Local Wi-Fi Host" (which spawns engine party server via `AfterToneNative.startServer`) vs. "Remote Party Server".
-- [ ] **Step 4:** Commit: `git commit -m "feat(android): wire Listen Together to AfterTone party engine protocol"`
+- [x] **Step 1:** Wire the Android party client to communicate with AfterTone's party server format (6-character uppercase codes, JSON action messages `Join`, `Leave`, `SyncState`, `Heartbeat`).
+- [x] **Step 2:** Wire monotonic clock synchronization matching the engine's NTP-style ping/pong calculation.
+- [x] **Step 3:** Provide an in-app toggle: "Local Wi-Fi Host" (which spawns engine party server via `AfterToneNative.startServer`) vs. "Remote Party Server".
+- [x] **Step 4:** Commit: `git commit -m "feat(android): wire Listen Together to AfterTone party engine protocol"`
 
 ---
 
@@ -191,11 +191,11 @@
 **Files:**
 - Create: `.github/workflows/android.yml`
 
-- [ ] **Step 1:** Write `.github/workflows/android.yml` triggering on pushes to `main` and `feat/android`.
-- [ ] **Step 2:** Configure steps: Checkout repository, setup Java 21, setup Android SDK with NDK 26+ and CMake 3.22.1, setup Rust with `aarch64-linux-android` target.
-- [ ] **Step 3:** Run `./gradlew assembleDevDebug` from `android/`.
-- [ ] **Step 4:** Upload generated APK artifact (`android/app/build/outputs/apk/dev/debug/app-dev-debug.apk`).
-- [ ] **Step 5:** Commit: `git commit -m "ci: add GitHub Actions workflow for Android build"`
+- [x] **Step 1:** Write `.github/workflows/android.yml` triggering on pushes to `main` and `feat/android`.
+- [x] **Step 2:** Configure steps: Checkout repository, setup Java 21, setup Android SDK with NDK 26+ and CMake 3.22.1, setup Rust with `aarch64-linux-android` target.
+- [x] **Step 3:** Run `./gradlew assembleDevDebug` from `android/`.
+- [x] **Step 4:** Upload generated APK artifact (`android/app/build/outputs/apk/dev/debug/app-dev-debug.apk`).
+- [x] **Step 5:** Commit: `git commit -m "ci: add GitHub Actions workflow for Android build"`
 
 ---
 
@@ -206,9 +206,9 @@
 - Modify: `README.md`
 - Modify: `android/README.md`
 
-- [ ] **Step 1:** Create root `NOTICE` detailing copyright and GPL-3.0 attribution for BitChord, Kushagra Singh, and all bundled libraries.
-- [ ] **Step 2:** Update root `README.md` adding Android build instructions using `gradlew.bat` and PowerShell.
-- [ ] **Step 3:** Run `git grep -i "bitchord"` across `android/` and verify that any remaining occurrences are strictly in copyright/upstream license notices.
-- [ ] **Step 4:** Run `git grep -i "api.bitchord"` to guarantee zero telemetry endpoints remain.
-- [ ] **Step 5:** Run `cargo test --manifest-path engine/Cargo.toml --release` to verify engine integrity.
-- [ ] **Step 6:** Commit: `git commit -m "docs: add Android build instructions, NOTICE attribution, and verification"`
+- [x] **Step 1:** Create root `NOTICE` detailing copyright and GPL-3.0 attribution for BitChord, Kushagra Singh, and all bundled libraries.
+- [x] **Step 2:** Update root `README.md` adding Android build instructions using `gradlew.bat` and PowerShell.
+- [x] **Step 3:** Run `git grep -i "bitchord"` across `android/` and verify that any remaining occurrences are strictly in copyright/upstream license notices.
+- [x] **Step 4:** Run `git grep -i "api.bitchord"` to guarantee zero telemetry endpoints remain.
+- [x] **Step 5:** Run `cargo test --manifest-path engine/Cargo.toml --release` to verify engine integrity.
+- [x] **Step 6:** Commit: `git commit -m "docs: add Android build instructions, NOTICE attribution, and verification"`
