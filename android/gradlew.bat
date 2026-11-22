@@ -42,6 +42,18 @@ set JAVA_EXE=java.exe
 %JAVA_EXE% -version >NUL 2>&1
 if "%ERRORLEVEL%" == "0" goto execute
 
+@rem Auto-detect user JDK installations (.jdks)
+if exist "%USERPROFILE%\.jdks\jdk-21.0.13+9\bin\java.exe" (
+    set "JAVA_HOME=%USERPROFILE%\.jdks\jdk-21.0.13+9"
+    goto findJavaFromJavaHome
+)
+for /d %%D in ("%USERPROFILE%\.jdks\*") do (
+    if exist "%%D\bin\java.exe" (
+        set "JAVA_HOME=%%D"
+        goto findJavaFromJavaHome
+    )
+)
+
 echo.
 echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
 echo.
