@@ -19,17 +19,17 @@ Thank you for contributing to AfterTone! Follow these guidelines to ensure an ef
 - **Windows Build Tools** (for Windows desktop deployment)
 
 ## Build and Test Commands
-Run Cargo commands from the repository root:
+Run Cargo commands with `--manifest-path` or from the `engine/` directory:
 
 ```bash
 # Run unit and integration tests
-cargo test
+cargo test --manifest-path engine/Cargo.toml
 
 # Build release binary
-cargo build --release
+cargo build --release --manifest-path engine/Cargo.toml
 
 # Build Windows Installer (Inno Setup)
-powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1
+powershell -ExecutionPolicy Bypass -File windows\scripts\build-installer.ps1
 ```
 
 ## Licensing
