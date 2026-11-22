@@ -129,17 +129,39 @@
   aftertone proxy
   ```
 
+  ### Repository Structure
+
+  AfterTone is organized as a clean multi-platform monorepo:
+
+  ```text
+  AfterTone/
+  ├── .github/        CI workflows and automated test pipelines
+  ├── engine/         Native Rust backend engine, proxy, and CLI utility
+  ├── windows/        Windows desktop app, installer configuration, and build scripts
+  ├── web/            Web client and party listen-along interface
+  ├── docs/           Documentation, technical specifications, and development plans
+  ├── Banner.png      Repository branding banner
+  ├── Logo.png        Application icon artwork
+  ├── README.md       Project documentation and guides
+  ├── LICENSE         GNU General Public License v3.0
+  └── .gitignore      Project and platform ignore definitions
+  ```
+
   ### Building From Source
 
   ```bash
   # Run unit and integration tests (16 tests)
-  cargo test
+  cargo test --manifest-path engine/Cargo.toml
+  # or from the engine directory:
+  cd engine && cargo test
 
   # Build optimized release executable
-  cargo build --release
+  cargo build --release --manifest-path engine/Cargo.toml
+  # or from the engine directory:
+  cd engine && cargo build --release
 
   # Compile the standalone Windows Setup installer
-  powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1
+  powershell -ExecutionPolicy Bypass -File windows\scripts\build-installer.ps1
   ```
 
   ---
