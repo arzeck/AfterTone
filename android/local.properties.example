@@ -1,0 +1,9 @@
+## This file should NOT be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+#
+# Location of the SDK. This is only used by Gradle.
+# For Windows users:
+sdk.dir=C:\\Users\\Aneesh\\AppData\\Local\\Android\\Sdk
+
+# For Linux/macOS users:
+# sdk.dir=/home/username/Android/Sdk
